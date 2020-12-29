@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Social</string>
+    <string name="title_activity_firebase_u_i">FirebaseUIActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="signup">SignUp</string>
+    <string name="password">Password</string>
+    <string name="passwordTitle">Password :</string>
+    <string name="username">Username</string>
+    <string name="usernametitle">Username :</string>
+    <string name="signin">SignIn</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="validate">Verify Email Address</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home"> Home </string>
+    <string name="USER_DETAILS">USER_DETAILS</string>
+    <string name="resend">You can resent verification email in 10seconds</string>
+    <string name="id">ID</string>
+    <string name="numOfLikes">52 likes</string>
+    <string name="imageTitle">Aloo corn frankie</string>
+    <string name="Auth">Auth</string>
+    <string name="posts">Posts</string>
+    <string name="_32">32</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+</resources>

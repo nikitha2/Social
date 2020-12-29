@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment"
+    android:background="@color/black">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pofile_image"
+        android:layout_width="@dimen/zerodp"
+        android:layout_height="@dimen/zerodp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/margin16"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView_posts">
+
+        <ImageView
+            android:id="@+id/roundedimage_pofile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/socail" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/posts"
+        android:layout_width="@dimen/zerodp"
+        android:layout_height="@dimen/zerodp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toRightOf="@id/pofile_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView_posts">
+
+        <TextView
+            android:id="@+id/pofile_postsNums"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zerodp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/_32"
+            style="@style/homeScreenText1"/>
+
+        <TextView
+            android:id="@+id/pofile_posts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zerodp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@id/pofile_postsNums"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/posts"
+            style="@style/homeScreenText1"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/followers"
+        android:layout_width="@dimen/zerodp"
+        android:layout_height="@dimen/zerodp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toRightOf="@id/posts"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView_posts">
+
+        <TextView
+            android:id="@+id/pofile_followersNums"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zerodp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/_32"
+            style="@style/homeScreenText1"/>
+
+        <TextView
+            android:id="@+id/pofile_followers"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zerodp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@id/pofile_followersNums"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/followers"
+            style="@style/homeScreenText1"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/following"
+        android:layout_width="@dimen/zerodp"
+        android:layout_height="@dimen/zerodp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toRightOf="@id/followers"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.28"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView_posts">
+
+        <TextView
+            android:id="@+id/pofile_followingNums"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zerodp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/_32"
+            style="@style/homeScreenText1"/>
+
+        <TextView
+            android:id="@+id/pofile_following"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zerodp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@id/pofile_followingNums"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/following"
+            style="@style/homeScreenText1"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_posts"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zerodp"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pofile_image"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
