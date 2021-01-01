@@ -24,7 +24,12 @@
     <string name="imageTitle">Aloo corn frankie</string>
     <string name="Auth">Auth</string>
     <string name="posts">Posts</string>
-    <string name="_32">32</string>
+    <string name="_32">0</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="username_search">search username</string>
+    <string name="title_activity_searchable">SearchableActivity</string>
+    <string name="search">search</string>
+    <string name="plus">plus</string>
+    <string name="sign_out">sign out</string>
 </resources>

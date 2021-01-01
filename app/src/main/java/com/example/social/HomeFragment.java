@@ -2,6 +2,7 @@ package com.example.social;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -96,7 +98,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Comm
         this.context=context;
         mAuth = FirebaseAuth.getInstance();
     }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -117,6 +118,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Comm
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     public static final int PERMISSION_REQUEST_ACTIVITY_ACCESS_FINE_LOCATION_ALREADYGRANTED = 2;
     public static final int PERMISSION_REQUEST_ACTIVITY_ACCESS_FINE_LOCATION_GRANTED_NOW = 1;
@@ -178,7 +180,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Comm
                 byte[] byteArray = stream.toByteArray();
 
                 intent.putExtra("picture", byteArray);
-                startActivityForResult(intent,SHARE_IMG_RESULT_CODE);
+                startActivity(intent);
                 break;
 
              case SHARE_IMG_RESULT_CODE:
@@ -190,7 +192,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Comm
                  byteArray = stream.toByteArray();
 
                  FirebaseUser currentUser = mAuth.getCurrentUser();
-                 String ProfilePicFolder="ProfilePic";
                  String path=currentUser.getUid()+"/ProfilePic/"+ UUID.randomUUID()+".png";
                  StorageMetadata metadata= new StorageMetadata.Builder().setCustomMetadata("uid",currentUser.getUid()).build();
                  commonDb.uploadImageToStorage(TASK_PROFILE_PIC_URL,byteArray,null, path, metadata,null,null);

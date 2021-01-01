@@ -50,6 +50,8 @@ public class SelectImageFromGalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_image_from_gallery);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         context=this;
         previewImg=findViewById(R.id.preview_img);
         progressBar=findViewById(R.id.progressBar_preview_img);

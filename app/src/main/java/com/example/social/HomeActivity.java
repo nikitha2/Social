@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.tabs.TabItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,6 +22,10 @@ public class HomeActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     private TextView mTextView;
     private FirebaseAuth mAuth;
+    TabItem home;
+    TabItem search;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,5 +48,38 @@ public class HomeActivity extends AppCompatActivity {
                     .addToBackStack("HomeFragment") // name can be null
                     .commit();
         }
+
+
+        home=findViewById(R.id.home);
+        search=findViewById(R.id.search);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        home.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container_home, new HomeFragment(), null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("HomeFragment") // name can be null
+                        .commit();
+            }
+        });
+
+        search.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container_home, new SearchFragment(), null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("HomeFragment") // name can be null
+                        .commit();
+            }
+        });
     }
 }

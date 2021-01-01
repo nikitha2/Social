@@ -9,9 +9,9 @@
         android:iconTint="@color/accent"/>
 
     <item
-        android:id="@+id/add"
-        app:showAsAction="ifRoom"
-        android:title="@string/plus"
-        android:icon="@drawable/add" />
+        android:id="@+id/search"
+        app:showAsAction="always"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
 </menu>
