@@ -14,6 +14,12 @@
         android:roundIcon="@drawable/socail"
         android:supportsRtl="true"
         android:theme="@style/Theme.Social">
+        <activity android:name=".SearchedActivity"
+            android:parentActivityName=".HomeActivity"></activity>
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchableActivity" />
 
         <activity
             android:name=".SearchableActivity"
@@ -22,10 +28,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
-        </activity>
 
-        <activity android:name=".SelectImageFromGalleryActivity"/>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity android:name=".SelectImageFromGalleryActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -34,14 +42,15 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home">
-            <!--<meta-data android:name="android.app.default_searchable" android:value=".SearchableActivity" />-->
+
+            <!-- <meta-data android:name="android.app.default_searchable" android:value=".SearchableActivity" /> -->
         </activity>
     </application>
 

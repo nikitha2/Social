@@ -3,6 +3,7 @@ package com.example.social;
 import android.Manifest;
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -75,7 +76,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        commonDb = new CommonDb(context, null, null,null);
+        commonDb = new CommonDb(context, null, null,null,null);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.menu4, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_action).getActionView();
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));

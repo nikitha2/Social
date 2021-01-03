@@ -50,13 +50,13 @@ public class SelectImageFromGalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_image_from_gallery);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        setTitle(getString(R.string.upload));
 
         context=this;
         previewImg=findViewById(R.id.preview_img);
         progressBar=findViewById(R.id.progressBar_preview_img);
         storage = FirebaseStorage.getInstance();
-        commonDb=new CommonDb(context,null,null,null);
+        commonDb=new CommonDb(context,null,null,null,null);
 
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {

@@ -18,14 +18,17 @@ import java.util.Map;
 
 import static com.example.social.CommonDb.DISPLAY_IMAGE_URL;
 import static com.example.social.CommonDb.DISPLAY_NAME;
+import static com.example.social.CommonDb.LOGGEDIN;
+import static com.example.social.CommonDb.URL;
+import static com.example.social.CommonDb.mAuth;
 
 public class SearchListAdaptor extends RecyclerView.Adapter {
-    ArrayList<Map<String, Object>> list_searchResults;
+    ArrayList<Map<String, Object>> list_searchResultsData;
     Context context;
     ListItemClickListener mClickListener;
 
     public SearchListAdaptor(Context context,  ArrayList<Map<String, Object>> list_searchResults, ListItemClickListener mClickListener) {
-        this.list_searchResults=list_searchResults;
+        this.list_searchResultsData =list_searchResults;
         this.context=context;
         this.mClickListener=mClickListener;
     }
@@ -60,27 +63,38 @@ public class SearchListAdaptor extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         View currentView = holder.itemView;
-        Map<String, Object> currentItemAtPos = list_searchResults.get(position);
+        Map<String, Object> currentItemAtPos = list_searchResultsData.get(position);
 
         ImageView imageView= currentView.findViewById(R.id.roundedimage_pofile_image_search);
+        ImageView avail= currentView.findViewById(R.id.pofile_avail);
         TextView username= currentView.findViewById(R.id.pofile_name);
+        TextView posts= currentView.findViewById(R.id.pofile_postsno);
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher_round)
                 .error(R.mipmap.ic_launcher_round);
         Glide.with(context).load(currentItemAtPos.get(DISPLAY_IMAGE_URL)).apply(options).into(imageView);
 
-        username.setText((Integer) currentItemAtPos.get(DISPLAY_NAME));
+        username.setText(currentItemAtPos.get(DISPLAY_NAME).toString());
+
+        if( currentItemAtPos.get(LOGGEDIN) !=null) {   // change condition
+            posts.setText("Available");
+            avail.setImageResource(R.drawable.available);
+        }
+        else {
+            posts.setText("Offline");
+            avail.setImageResource(R.drawable.unavailable);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return list_searchResults.size();
+        return list_searchResultsData.size();
     }
 
     public void setData(ArrayList<Map<String, Object>> data) {
-        list_searchResults.clear();
-        list_searchResults.addAll(data);
+        list_searchResultsData.clear();
+        list_searchResultsData.addAll(data);
         notifyDataSetChanged();
     }
 }

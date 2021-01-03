@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,10 +18,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CommonDb {
@@ -43,6 +47,7 @@ public class CommonDb {
     public static final String DISPLAY_IMAGE_URL = "DISPLAY_IMAGE_URL";
     public static final String TIMESTAMP = "timestamp";
     public static final String URL = "URL";
+    public static final String LOGGEDIN = "loggedIn";
     FirebaseStorage storage ;
     private static FirebaseFirestore db ;
     private static DocumentReference mDocRef;
@@ -50,9 +55,10 @@ public class CommonDb {
     GetAllUsersCallBack  getAllUsersCallBack;
     public static FirebaseAuth mAuth;
     FirebaseUser firebaseUseruser;
+    GetQueryResultsCallBack getQueryResultsCallBack;
     DisplayImageUrlSuccessCallback displayImageUrlSuccessCallback;
     Context context;
-    public CommonDb(Context context, AddUserToCollectionSuccessCallback addUserToCollectionSuccessCallback, GetAllUsersCallBack getAllUsersCallBack, DisplayImageUrlSuccessCallback displayImageUrlSuccessCallback) {
+    public CommonDb(Context context, AddUserToCollectionSuccessCallback addUserToCollectionSuccessCallback, GetAllUsersCallBack getAllUsersCallBack, DisplayImageUrlSuccessCallback displayImageUrlSuccessCallback,GetQueryResultsCallBack getQueryResultsCallBack) {
         this.addUserToCollectionSuccessCallback = addUserToCollectionSuccessCallback;
         this.getAllUsersCallBack=getAllUsersCallBack;
         this.context=context;
@@ -60,6 +66,7 @@ public class CommonDb {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         this.firebaseUseruser = mAuth.getCurrentUser();
+        this.getQueryResultsCallBack=getQueryResultsCallBack;
     }
 
 
@@ -72,7 +79,7 @@ public class CommonDb {
         user.put(EMAIL_ID, firebaseUseruser.getEmail());
         user.put(UID, firebaseUseruser.getUid());
         user.put(DISPLAY_NAME, firebaseUseruser.getEmail().split("@")[0]);
-        
+        user.put(LOGGEDIN, true);
         user.put(TIMESTAMP, FieldValue.serverTimestamp());
 
         // Add a new document with a generated ID
@@ -126,6 +133,7 @@ public class CommonDb {
         // [START update_document]
         final Task<Void>[] mDocRefUpdate = new Task[]{null};
         mDocRef = db.document("users/" + firebaseUseruser.getUid());
+
         // Set the "isCapital" field of the city 'DC'
         if (urlValue != null) {
             mDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -178,9 +186,38 @@ public class CommonDb {
                     }
                 }
             });
-            // [END update_document]
         }
+
     }
+
+    public void logoffUser() {
+        boolean loggedin;
+        if(firebaseUseruser ==null){
+            loggedin=false;
+        }else{
+            loggedin=true;
+        }
+            mDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Map<String, Object> data = document.getData();
+                            boolean log;
+                            mDocRef.update(LOGGEDIN, loggedin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully updated! updateDocument profilePicUrlValue");
+                                }
+                            });
+
+                        }
+                    }
+                }
+            });
+    }
+
     interface DisplayImageUrlSuccessCallback{
         public void displayImageUrlSuccessCallbackOnSuccess();
     }
@@ -234,7 +271,7 @@ public class CommonDb {
                     public void onSuccess(Uri uri) {
                         url[0] = String.valueOf(uri);
                         if(TASK_ADD_URL.equals(task)) {
-                            updateDocument(url[0], null, intent);
+                            updateDocument(url[0], null, intent );
                         }else if(TASK_PROFILE_PIC_URL.equals(task)){
                             updateDocument(null, url[0], null);
                         }
@@ -252,5 +289,36 @@ public class CommonDb {
                 }
             }
         });
+    }
+
+
+    public void getResultsForQueryFromFirestoreDB(String query, SearchListAdaptor firebaseRecyclerAdapter) {
+        ArrayList<Map<String, Object>> list_searchResults = new ArrayList<>();
+        CollectionReference mDocRef1 = db.collection("users");
+        Query firebaseSearchQuery= mDocRef1.whereGreaterThanOrEqualTo("DisplayName", query);
+        firebaseSearchQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    QuerySnapshot result = task.getResult();
+                    int size = result.getDocuments().size();
+                    if (!result.getDocuments().isEmpty()) {
+//                        list_searchResults.clear();
+                        for( DocumentSnapshot document: result.getDocuments()){
+                            if(document.get(DISPLAY_NAME).toString().contains(query))
+                                list_searchResults.add(document.getData());
+                        }
+                    }
+                    getQueryResultsCallBack.getQueryResultsCallBack(list_searchResults);
+                    //firebaseRecyclerAdapter.setData(list_searchResults);
+                }else{
+
+                }
+            }
+        });
+    }
+
+    interface GetQueryResultsCallBack {
+        public void getQueryResultsCallBack(ArrayList<Map<String, Object>> data);
     }
 }

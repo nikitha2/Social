@@ -30,26 +30,30 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.social.CommonDb.DISPLAY_NAME;
 
-public class SearchableActivity extends AppCompatActivity implements SearchListAdaptor.ListItemClickListener {
+public class SearchableActivity extends AppCompatActivity implements SearchListAdaptor.ListItemClickListener, CommonDb.GetQueryResultsCallBack {
     private static final String TAG = SearchableActivity.class.getSimpleName();
     ArrayList<Map<String, Object>> list_searchResults;
     private static FirebaseFirestore db ;
     private static CollectionReference mDocRef;
     SearchableActivity context;
-
-
+    CommonDb commonDb;
+    SearchListAdaptor firebaseRecyclerAdapter;
     private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchable);
+        setTitle("SearchableActivity");
         context = this;
-        setTitle(R.string.app_name);
+        commonDb=new CommonDb(this,null,null,null,this);
+        setTitle(getString(R.string.resultsForSearch));
         recyclerView=findViewById(R.id.search_list);
         handleIntent(getIntent());
     }
@@ -64,34 +68,16 @@ public class SearchableActivity extends AppCompatActivity implements SearchListA
 
     private void doMySearch(String query) {
         list_searchResults=new ArrayList<>();
-        SearchListAdaptor firebaseRecyclerAdapter=new SearchListAdaptor(this,list_searchResults,this);
+        firebaseRecyclerAdapter=new SearchListAdaptor(this,list_searchResults,this);
         recyclerView.setAdapter(firebaseRecyclerAdapter);
-
-        db = FirebaseFirestore.getInstance();
-        mDocRef = db.collection("users");
-        Query firebaseSearchQuery= mDocRef.whereGreaterThanOrEqualTo("DisplayName", query);
-        firebaseSearchQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    QuerySnapshot result = task.getResult();
-                    int size = result.getDocuments().size();
-                    if (!result.getDocuments().isEmpty()) {
-                        list_searchResults.clear();
-                        for( DocumentSnapshot document: result.getDocuments()){
-                            if(document.get(DISPLAY_NAME).toString().contains(query))
-                                 list_searchResults.add(document.getData());
-                        }
-                    }
-                    
-                }else{
-
-                }
-            }
-        });
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        commonDb.getResultsForQueryFromFirestoreDB(query, firebaseRecyclerAdapter);
 
 
     }
+
+
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -100,6 +86,14 @@ public class SearchableActivity extends AppCompatActivity implements SearchListA
 
     @Override
     public void onListItemClick(int position) {
+        Map<String, Object> document = list_searchResults.get(position);
+        Intent intent = new Intent(this, SearchedActivity.class);
+        intent.putExtra(getString(R.string.DOCUMENT_KEY), (Serializable) document);
+        startActivity(intent);
+    }
 
+    @Override
+    public void getQueryResultsCallBack(ArrayList<Map<String, Object>> data) {
+        firebaseRecyclerAdapter.setData( data);
     }
 }

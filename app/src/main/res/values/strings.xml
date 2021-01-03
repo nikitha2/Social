@@ -32,4 +32,8 @@
     <string name="search">search</string>
     <string name="plus">plus</string>
     <string name="sign_out">sign out</string>
+    <string name="resultsForSearch">search results</string>
+    <string name="upload">Upload Image</string>
+    <string name="available">Available</string>
+    <string name="DOCUMENT_KEY">document</string>
 </resources>

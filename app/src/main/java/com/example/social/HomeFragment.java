@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Comm
     @Override
     public void onResume() {
         super.onResume();
-        commonDb = new CommonDb(context, this, this,this);
+        commonDb = new CommonDb(context, this, this,this,null);
         commonDb.getAllPostsForUser();
     }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/following"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintHeight_percent="0.1"
+    app:layout_constraintLeft_toRightOf="@id/followers"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintWidth_percent="0.28"
+    app:layout_constraintBottom_toTopOf="@id/recyclerView_posts"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/pofile_followingNums"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zerodp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/_32"
+        style="@style/homeScreenText1"/>
+
+    <TextView
+        android:id="@+id/pofile_following"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zerodp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@id/pofile_followingNums"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/following"
+        style="@style/homeScreenText1"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

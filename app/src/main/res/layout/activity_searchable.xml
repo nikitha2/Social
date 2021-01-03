@@ -2,20 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/boxInsetLayout2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".SearchableActivity">
-
+    android:layout_height="match_parent"
+    tools:context=".SearchableActivity"
+    android:background="@color/black">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:padding="@dimen/margin8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

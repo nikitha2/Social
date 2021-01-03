@@ -53,13 +53,13 @@ public class Common  {
     }
 
     public void updateUI(FirebaseUser user, Context context,FirebaseAuth mAuth) {
-        commonDb=new CommonDb(context,null,null,null);
+        commonDb=new CommonDb(context,null,null,null,null);
         this.mAuth=mAuth;
         if (user != null) {
             if (user.isEmailVerified()) {
                 commonDb.addorUpdateUserToCollectionAndStartNewActivity(new Intent(context, HomeActivity.class));
             }
-        }else if(user==null){
+        }else if(user==null && context!=MainActivity.context){
             Intent intent=new Intent(context,MainActivity.class);
             context.startActivity(intent);
         }
@@ -68,7 +68,7 @@ public class Common  {
     public void signOut(FirebaseAuth mAuth,Context context) {
         FirebaseAuth.getInstance().signOut();
         updateUI(null,context,mAuth);
-
+        commonDb.logoffUser();
     }
 
 

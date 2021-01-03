@@ -115,6 +115,8 @@ public class SigninOrSignupFragment extends Fragment implements  View.OnClickLis
                     Toast.makeText(getActivity(), "Authentication failed.",Toast.LENGTH_SHORT).show();
                     updateUI(null);
                     common.checkForMultiFactorFailure(task.getException(),status,getActivity());
+                    Username_editText.setText("");
+                    Password_editText.setText("");
                 }
                 common.hideProgressBar(progressBar);
             }
@@ -140,8 +142,8 @@ public class SigninOrSignupFragment extends Fragment implements  View.OnClickLis
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                     Toast.makeText(getActivity(), "Authentication failed.",Toast.LENGTH_SHORT).show();
-                    updateUI(null);
                     common.checkForMultiFactorFailure(task.getException(),status,getActivity());
+                    updateUI(null);
                 }
                 common.hideProgressBar(progressBar);
             }
