@@ -4,7 +4,7 @@
     android:minHeight="40dp"
     android:updatePeriodMillis="86400000"
     android:previewImage="@drawable/socail"
-    android:initialLayout="@layout/example_appwidget"
+    android:initialLayout="@layout/social_appwidget_layout"
     android:configure="com.example.social.SocialAppWidgetConfigure"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen">
