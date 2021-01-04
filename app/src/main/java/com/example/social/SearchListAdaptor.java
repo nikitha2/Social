@@ -19,8 +19,6 @@ import java.util.Map;
 import static com.example.social.CommonDb.DISPLAY_IMAGE_URL;
 import static com.example.social.CommonDb.DISPLAY_NAME;
 import static com.example.social.CommonDb.LOGGEDIN;
-import static com.example.social.CommonDb.URL;
-import static com.example.social.CommonDb.mAuth;
 
 public class SearchListAdaptor extends RecyclerView.Adapter {
     ArrayList<Map<String, Object>> list_searchResultsData;
@@ -78,11 +76,11 @@ public class SearchListAdaptor extends RecyclerView.Adapter {
         username.setText(currentItemAtPos.get(DISPLAY_NAME).toString());
 
         if( currentItemAtPos.get(LOGGEDIN) !=null) {   // change condition
-            posts.setText("Available");
+            posts.setText(R.string.avail);
             avail.setImageResource(R.drawable.available);
         }
         else {
-            posts.setText("Offline");
+            posts.setText(R.string.offline);
             avail.setImageResource(R.drawable.unavailable);
         }
     }

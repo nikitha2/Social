@@ -36,4 +36,14 @@
     <string name="upload">Upload Image</string>
     <string name="available">Available</string>
     <string name="DOCUMENT_KEY">document</string>
+    <string name="sent_verification_email">Sent Verification Email</string>
+    <string name="status">status</string>
+    <string name="refresh">refresh</string>
+    <string name="share">Share</string>
+    <string name="avail">Available</string>
+    <string name="offline">Offline</string>
+    <string name="resendEval">Re-sent verification Email</string>
+    <string name="profile_image">profile image</string>
+    <string name="like_icon">like icon</string>
+    <string name="is_user_avalible">is User avalible</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.example.social;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -108,7 +106,7 @@ public class ValidateFragment extends Fragment implements View.OnClickListener {
                             public void run() {
                                 verify.setEnabled(true);
                                 status_verify.setVisibility(View.VISIBLE);
-                                verify.setText("Re-sent verification Email");
+                                verify.setText(R.string.resendEval);
                             }
                         });
                     }

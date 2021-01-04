@@ -14,8 +14,9 @@
         android:roundIcon="@drawable/socail"
         android:supportsRtl="true"
         android:theme="@style/Theme.Social">
-        <activity android:name=".SearchedActivity"
-            android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".SearchedActivity"
+            android:parentActivityName=".HomeActivity" />
 
         <meta-data
             android:name="android.app.default_searchable"

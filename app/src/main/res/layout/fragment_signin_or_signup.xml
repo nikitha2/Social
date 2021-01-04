@@ -24,7 +24,7 @@
         style="@style/userNamePasswordStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="status"
+        android:text="@string/status"
         app:layout_constraintBottom_toTopOf="@id/Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,46 +1,24 @@
 package com.example.social;
 
-import android.app.DownloadManager;
-import android.app.ListActivity;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import static com.example.social.CommonDb.DISPLAY_NAME;
 
 public class SearchableActivity extends AppCompatActivity implements SearchListAdaptor.ListItemClickListener, CommonDb.GetQueryResultsCallBack {
     private static final String TAG = SearchableActivity.class.getSimpleName();
     ArrayList<Map<String, Object>> list_searchResults;
-    private static FirebaseFirestore db ;
+    private  FirebaseFirestore db ;
     private static CollectionReference mDocRef;
     SearchableActivity context;
     CommonDb commonDb;

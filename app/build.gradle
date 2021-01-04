@@ -4,6 +4,14 @@ plugins {
 }
 apply plugin: 'com.google.gms.google-services'
 android {
+    signingConfigs {
+        key0_blabla {
+            storeFile file('C:\\Users\\nikit\\OneDrive\\Desktop\\Android\\Projects\\CAPSTONE_PROJECT\\KeyStore\\key')
+            storePassword 'blabla'
+            keyPassword 'blabla'
+            keyAlias 'key0_blabla'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -15,6 +23,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.key0_blabla
     }
 
     buildTypes {
