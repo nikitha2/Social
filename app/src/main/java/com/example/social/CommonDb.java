@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Downloader;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +41,7 @@ public class CommonDb {
     public static final String UID = "Uid";
     public static final String TASK_ADD_URL = "TASK_ADD_URL";
     public static final String TASK_PROFILE_PIC_URL = "TASK_PROFILE_PIC_URL";
-
+    public static boolean logginInFlag=true;
     private static final String TAG = CommonDb.class.getSimpleName();
     public static final String EMAIL_ID = "EmailID";
     public static final String DISPLAY_NAME = "DisplayName";
@@ -77,9 +80,8 @@ public class CommonDb {
         user.put(EMAIL_ID, firebaseUseruser.getEmail());
         user.put(UID, firebaseUseruser.getUid());
         user.put(DISPLAY_NAME, firebaseUseruser.getEmail().split("@")[0]);
-        user.put(LOGGEDIN, true);
         user.put(TIMESTAMP, FieldValue.serverTimestamp());
-
+        user.put(LOGGEDIN, true);
         // Add a new document with a generated ID
         mDocRef = db.document("users/" + firebaseUseruser.getUid());
 
@@ -95,10 +97,18 @@ public class CommonDb {
                         urlList = (ArrayList<String>) data.get(URL);
                         displayImageUrl = (String) data.get(DISPLAY_IMAGE_URL);
                     }
+                    if(logginInFlag)
+                        user.put(LOGGEDIN, true);
+                    else
+                        user.put(LOGGEDIN, false);
                     user.put(URL, urlList);
                     user.put(DISPLAY_IMAGE_URL, displayImageUrl);
                     addOrUpdateDocument(user, homeIntent);
                 }else{
+                    if(logginInFlag)
+                        user.put(LOGGEDIN, true);
+                    else
+                        user.put(LOGGEDIN, false);
                     user.put(URL, new ArrayList<String>());
                     user.put(DISPLAY_IMAGE_URL, "");
                     addOrUpdateDocument(user, homeIntent);
@@ -188,13 +198,8 @@ public class CommonDb {
 
     }
 
-    public void logoffUser() {
-        boolean loggedin;
-        if(firebaseUseruser ==null){
-            loggedin=false;
-        }else{
-            loggedin=true;
-        }
+    public  void logoffUser() {
+
             mDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -203,10 +208,14 @@ public class CommonDb {
                         if (document.exists()) {
                             Map<String, Object> data = document.getData();
                             boolean log;
-                            mDocRef.update(LOGGEDIN, loggedin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            logginInFlag=false;
+                            mDocRef.update(LOGGEDIN, false).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully updated! updateDocument profilePicUrlValue");
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseAuth.getInstance().signOut();
+//                                        Log.d(TAG, context.getString(R.string.LOGGEDIN_false));
+                                    }
                                 }
                             });
 
@@ -319,4 +328,6 @@ public class CommonDb {
     interface GetQueryResultsCallBack {
         public void getQueryResultsCallBack(ArrayList<Map<String, Object>> data);
     }
+
+
 }

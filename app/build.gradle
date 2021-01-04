@@ -6,7 +6,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         key0_blabla {
-            storeFile file('C:\\Users\\nikit\\OneDrive\\Desktop\\Android\\Projects\\CAPSTONE_PROJECT\\KeyStore\\key')
+            storeFile file('KeyStore/key')
             storePassword 'blabla'
             keyPassword 'blabla'
             keyAlias 'key0_blabla'

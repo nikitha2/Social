@@ -2,8 +2,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="social" parent="Theme.Social">
-
-
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowExitTransition">@transition/grid_exit_transition </item>   // exit transition to define how views leave the screen
+        <item name="android:windowReenterTransition">@transition/grid_reenter_transition </item>
     </style>
 
     <style name="userNamePasswordStyle" parent="FirebaseUI.TextInputLayout.EmailField">

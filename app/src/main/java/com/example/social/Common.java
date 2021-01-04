@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuthMultiFactorException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.MultiFactorResolver;
 
+import static com.example.social.CommonDb.LOGGEDIN;
+
 public class Common  {
     public static final int RESULT_NEEDS_MFA_SIGN_IN = 42;
     public static final String ID = "ID";
@@ -56,8 +58,8 @@ public class Common  {
         commonDb=new CommonDb(context,null,null,null,null);
         this.mAuth=mAuth;
         if (user != null) {
-            if (user.isEmailVerified()) {
-                commonDb.addorUpdateUserToCollectionAndStartNewActivity(new Intent(context, HomeActivity.class));
+            if (user.isEmailVerified() ) {
+                    commonDb.addorUpdateUserToCollectionAndStartNewActivity(new Intent(context, HomeActivity.class));
             }
         }else if(user==null && context!=MainActivity.context){
             Intent intent=new Intent(context,MainActivity.class);
@@ -66,9 +68,11 @@ public class Common  {
     }
 
     public void signOut(FirebaseAuth mAuth,Context context) {
-        FirebaseAuth.getInstance().signOut();
+
         updateUI(null,context,mAuth);
-        commonDb.logoffUser();
+        //commonDb.logoffUser();
+        new SignoutTask().execute(null,null, null);
+        //FirebaseAuth.getInstance().signOut();
     }
 
 
