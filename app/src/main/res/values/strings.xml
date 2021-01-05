@@ -47,5 +47,7 @@
     <string name="like_icon">like icon</string>
     <string name="is_user_avalible">is User avalible</string>
     <string name="LOGGEDIN_false">LOGGEDIN successfully updated!</string>
-    <string name="widget">widget</string>
+    <string name="widget">Widget for socail app</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

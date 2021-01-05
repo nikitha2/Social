@@ -20,4 +20,9 @@
         <item name="android:windowEnterTransition">@transition/slide_enter_bottom</item>
         <item name="android:windowExitTransition">@transition/slide_exit_top</item>
     </style>
+
+    <style name="ThemeOverlay.Social.AppWidgetContainer" parent="">
+        <item name="appWidgetBackgroundColor">@color/light_blue_600</item>
+        <item name="appWidgetTextColor">@color/light_blue_50</item>
+    </style>
 </resources>

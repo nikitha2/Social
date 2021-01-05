@@ -19,4 +19,10 @@
     <dimen name="margin8">8dp</dimen>
     <dimen name="margin6">6dp</dimen>
     <dimen name="zerodp">0dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
 </resources>
