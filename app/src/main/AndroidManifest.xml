@@ -14,7 +14,10 @@
         android:roundIcon="@drawable/socail"
         android:supportsRtl="true"
         android:theme="@style/Theme.Social">
-        <receiver android:name=".SocialAppWidget">
+
+        <receiver android:name=".SocialAppWidget"
+            android:icon="@drawable/socail"
+            android:roundIcon="@drawable/socail">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

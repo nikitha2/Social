@@ -20,7 +20,7 @@ public class SocialAppWidget extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.social_app_widget);
         views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
-        views.setImageViewResource(R.id.appwidget_text,R.drawable.socail);
+        views.setImageViewResource(R.id.appwidget_text,R.drawable.heart_fill);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
