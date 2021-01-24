@@ -50,7 +50,7 @@
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintLeft_toRightOf="@id/pofile_image"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.4"
         app:layout_constraintBottom_toTopOf="@id/recyclerView_posts"/>
 
 <!--    <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,6 +95,7 @@
         app:layout_constraintLeft_toRightOf="@id/posts"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.25"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/recyclerView_posts"/>
 
    <!-- <androidx.constraintlayout.widget.ConstraintLayout
@@ -134,6 +135,7 @@
         android:id="@+id/following"
         android:layout_width="@dimen/zerodp"
         android:layout_height="@dimen/zerodp"
+        android:visibility="gone"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintLeft_toRightOf="@id/followers"
         app:layout_constraintTop_toTopOf="parent"

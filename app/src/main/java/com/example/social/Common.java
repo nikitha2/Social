@@ -21,6 +21,7 @@ public class Common  {
     private static final String TAG = Common.class.getSimpleName();
     FirebaseAuth mAuth;
     CommonDb commonDb;
+    public static byte[] byteArrayCommon;
     public void showProgressBar(ProgressBar progressBar) {
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);

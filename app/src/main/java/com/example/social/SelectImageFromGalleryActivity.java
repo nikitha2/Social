@@ -49,7 +49,8 @@ public class SelectImageFromGalleryActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
-            byte[] byteArray = extras.getByteArray("picture");
+            Common common=new Common();
+            byte[] byteArray =  common.byteArrayCommon;
             processTheImage(byteArray);
         }
     }

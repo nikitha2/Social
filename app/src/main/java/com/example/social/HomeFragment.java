@@ -32,7 +32,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageMetadata;
-
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Map;
@@ -176,8 +175,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Comm
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
+                Log.d(TAG, String.valueOf(byteArray.length));
 
-                intent.putExtra("picture", byteArray);
+                common.byteArrayCommon=byteArray;
+
+                intent.putExtra("picture", "byteArray");
                 startActivity(intent);
                 break;
 
