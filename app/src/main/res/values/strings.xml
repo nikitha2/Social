@@ -50,4 +50,5 @@
     <string name="widget">Widget for socail app</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="preview_image_and_click_on_share_button">preview Image and click on share button</string>
 </resources>
